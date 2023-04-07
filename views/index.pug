@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  p My name is Premchand Are, i like to watch movies
+
+  button(type="button", class="btn btn-secondary"  onClick="reduce()") Press Me
+  div(id="reduce" ) REDUCE THE VALUE
+  a(href="shoe") to shoe
+
+  script.
+      let count=20;
+      let change = -1;
+      function reduce() {
+        count = count + change;
+        change=change-1;
+         document.getElementById('reduce').innerHTML = 'Count is' + count +'Change is' +change;
+      }
+
+
