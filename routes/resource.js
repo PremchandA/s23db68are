@@ -6,6 +6,8 @@ var shoe_controller = require('../controllers/shoe');
 /// API ROUTE ///
 // GET resources base.
 router.get('/', api_controller.api);
+
+router.get('/', shoe_controller.shoe_view_all_Page );
 /// COSTUME ROUTES ///
 // POST request for creating a Costume.
 router.post('/shoe', shoe_controller.shoe_create_post);
@@ -18,12 +20,4 @@ router.get('/shoe/:id', shoe_controller.shoe_detail);
 // GET request for list of all Costume items.
 router.get('/shoe', shoe_controller.shoe_list);
 module.exports = router;
-// API for our resources
-exports.api = function(req, res) {
-res.write('[');
-res.write('{"resource":"shoe", ');
-res.write(' "verbs":["GET","PUT", "DELETE"] ');
-res.write('}');
-res.write(']')
-res.send();
-};
+
