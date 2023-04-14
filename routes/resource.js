@@ -7,7 +7,7 @@ var shoe_controller = require('../controllers/shoe');
 // GET resources base.
 router.get('/', api_controller.api);
 
-router.get('/', shoe_controller.shoe_view_all_Page );
+
 /// COSTUME ROUTES ///
 // POST request for creating a Costume.
 router.post('/shoe', shoe_controller.shoe_create_post);
@@ -19,5 +19,7 @@ router.put('/shoe/:id', shoe_controller.shoe_update_put);
 router.get('/shoe/:id', shoe_controller.shoe_detail);
 // GET request for list of all Costume items.
 router.get('/shoe', shoe_controller.shoe_list);
+// GET request for one costume.
+router.get('/shoe/:id', shoe_controller.shoe_detail);
 module.exports = router;
 

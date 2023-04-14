@@ -77,7 +77,7 @@ app.use(function(err, req, res, next) {
 // We can seed the collection if needed on server start
  async function recreateDB(){
 // Delete everything
-  await Shoe.deleteMany;
+  await Shoe.deleteMany();
 let instance1 = new Shoe({shoeName:"Adidas", shoePrice: 100,
 shoemadein:'US'});
 instance1.save().then( () => {
@@ -85,13 +85,16 @@ instance1.save().then( () => {
 }).catch( (e) => {
   console.log('There was an error', e.message);
 });
+
 let instance2= new Shoe({shoeName:"puma", shoePrice: 50,
 shoemadein:'canada'});
+
 instance2.save().then( () => {
   console.log('second Object is created');
 }).catch( (e) => {
   console.log('There was an error', e.message);
 });
+
 let instance3 = new Shoe({shoeName:"nike", shoePrice: 70,
 shoemadein:'austarlia'});
 instance3.save().then( () => {
@@ -99,13 +102,6 @@ instance3.save().then( () => {
 }).catch( (e) => {
   console.log('There was an error', e.message);
 });
-
-
-
-
-
-
-
 }
 let reseed = true;
 if (reseed) { recreateDB();}

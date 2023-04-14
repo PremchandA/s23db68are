@@ -16,8 +16,27 @@ exports.shoe_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: shoe delete DELETE ' + req.params.id);
 };
 // Handle Costume update form on PUT.
-exports.shoe_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: shoe update PUT' + req.params.id);
+//Handle Costume update form on PUT.
+exports.shoe_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await Shoe.findById( req.params.id)
+// Do updates of properties
+if(req.body.shoeName) toUpdate.shoeName = req.body.shoeName;
+if(req.body.shoePrice) toUpdate.shoePrice = req.body.shoePrice;
+if(req.body.shoemadein) toUpdate.shoemadein = req.body.shoemadein;
+if(req.body.checkboxsale) toUpdate.sale = true;
+else toUpdate.same = false;
+
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
 // List of all shoes
 exports.shoe_list = async function(req, res) {
@@ -52,7 +71,7 @@ let document = new Shoe();
 // Even though bodies can be in many different formats, we will be picky
 // and require that it be a json object
 // {"costume_type":"goat", "cost":12, "size":"large"}
-document.shoe_shoeName = req.body.shoe_shoeName;
+document.shoeName = req.body.shoeName;
 document.shoePrice = req.body.shoePrice;
 document.shoemadein = req.body.shoemadein;
 try{
@@ -64,6 +83,19 @@ res.status(500);
 res.send(`{"error": ${err}}`);
 }
 };
+
+// for a specific shoe.
+exports.shoe_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Shoe.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+    
 
 
 
