@@ -21,5 +21,7 @@ router.get('/shoe/:id', shoe_controller.shoe_detail);
 router.get('/shoe', shoe_controller.shoe_list);
 // GET request for one costume.
 router.get('/shoe/:id', shoe_controller.shoe_detail);
+//* GET detail costume page 
 module.exports = router;
+
 
