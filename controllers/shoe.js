@@ -95,6 +95,20 @@ exports.shoe_detail = async function(req, res) {
     res.send(`{"error": document for id ${req.params.id} not found`);
     }
     };
+
+    // Handle Costume delete on DELETE.
+exports.shoe_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Shoe.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
     
 
 
