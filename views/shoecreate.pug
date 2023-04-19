@@ -1,32 +1,32 @@
 extends layout
 block content
-h1= title
-form(id='ShoeForm', action="/resource/shoe", method="POST")
-div.form-group
-label.shoeAttr(for='shoeName') shoe shoeName
-input#shoeName(type='text', name='shoeName')
-div.form-group
-label.shoeAttr(for='shoePrice') Cosshoetume shoePrice
-input#shoePrice(type='text', name='shoePrice')
-div.form-group
-label.shoeAttr(for='shoemadein') shoe shoemadein
-input#shoemadein(type='number', name='shoemadein')
-input(type="submit")
-script.
-document.forms['ShoeForm'].addEventListener('submit', (event) => {
-event.preventDefault();
-// TODO do something here to show user that form is being submitted
-fetch(event.target.action, {
-method: 'POST',
-body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-}).then((resp) => {
-return resp.json(); // or resp.text() or whatever the server sends
-}).then((body) => {
-alert("Save succeded")
-// TODO handle body
-}).catch((error) => {
-// TODO handle error
-alert("Save failed " + error )
-});
-});
+    h1= title
+    form(id='ShoeForm', action="/resource/shoe", method="POST")
+        div.form-group
+            label.shoeAttr(for='shoeName') shoe shoeName
+            input#shoeName(type='text', name='shoeName')
+        div.form-group
+            label.shoeAttr(for='shoePrice') shoe shoePrice
+            input#shoePrice(type='number', name='shoePrice')
+        div.form-group
+            label.shoeAttr(for='shoemadein') shoe shoemadein
+            input#shoemadein(type='text', name='shoemadein')
+        input(type="submit")
+    script.
+        document.forms['ShoeForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+        }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error )
+        });
+        });
 
