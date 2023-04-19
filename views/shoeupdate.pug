@@ -1,25 +1,29 @@
 extends layout
 block content
     h1= title
-    - let shoeid = toShow._id
-    - let shoeName = toShow.shoeName
-    - let shoePrice = toShow.shoePrice
-    - let shoemadein = toShow.shoemadein
-    div.row(class='mb-2')
-      div.mr-1 ID is
-      div #{shoeid}
-    - let actionid = "/resource/shoe/" + shoeid
-    form(id='ShoeForm', action= actionid, method="PUT")
-      div.form-group
-        label.shoeAttr(for='shoeName') shoe shoeName
-        input#shoeName(type='text', name='shoeName', value= shoeName )
-      div.form-group
-      label.shoeAttr(for='shoePrice') shoe shoePrice
-        input#shoePrice(type='number', name='shoePrice', value= shoePrice )
-      div.form-group
-        label.shoeAttr(for='shoemadein') shoe shoemadein
-        input#shoemadein(type='text', name='shoemadein', value= shoemadein )
-      input(type="submit")
+
+    if (toShow == null)
+      h2 No instance to delete
+    else
+        - let shoeid = toShow._id
+        - let shoeName = toShow.shoeName
+        - let shoePrice = toShow.shoePrice
+        - let shoemadein = toShow.shoemadein
+        div.row(class='mb-2')
+        div.mr-1 ID is
+        div #{shoeid}
+        - let actionid = "/resource/shoe/" + shoeid
+        form(id='ShoeForm', action= actionid, method="PUT")
+        div.form-group
+            label.shoeAttr(for='shoeName') shoe shoeName
+            input#shoeName(type='text', name='shoeName', value= shoeName )
+        div.form-group
+        label.shoeAttr(for='shoePrice') shoe shoePrice
+            input#shoePrice(type='number', name='shoePrice', value= shoePrice )
+        div.form-group
+            label.shoeAttr(for='shoemadein') shoe shoemadein
+            input#shoemadein(type='text', name='shoemadein', value= shoemadein )
+        input(type="submit")
     script.
       document.forms['ShoeForm'].addEventListener('submit', (event) => {
         event.preventDefault();
