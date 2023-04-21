@@ -1,31 +1,16 @@
-//- extends layout
-
-//- block content
-//-   h1= title
-//-   - let myresults = [{shoeName:"Adidas",shoePrice:"100$",shoemadein:"US"},{shoeName:"puma",shoePrice:"50$",shoemadein:"Canada"},{shoeName:"nike",shoePrice:"60$",shoemadein:"australia"}]
-//-   div(class="container-fluid")
-//-     div(class="row")
-//-       each item,index in myresults
-//-         div(class="col-sm-2", onClick=`buy(${index})`)
-//-           p Name of the shoe is #{item.shoeName}
-//-           p shoe price is  #{item.shoePrice}
-//-           p shoe is made in #{item.shoemadein}
-  
-//-   script.
-//-     function buy(N) {
-//-       N=N+1;
-//-       alert('You purchased item '+N);
-//-     }             
-
-
 extends layout
 
 block content
+  - let shoe = results
   h1= title
-  - let Shoe=results
-  button.btn( class="btn-primary ml-1", onclick= destinationcreate) Create
   div(class="container-fluid")
   div(class="row m-1")
-    each Shoes in Shoe
-         div(class="col-ml-1 btn btn-light") #{'shoename :'+Shoes.shoeName} - #{'shoeprice: '+Shoes.shoePrice} - #{'shoemmadein : '+Shoes.shoemadein}
-  
+    each shoes in shoe
+      - let destination = `dispatch(\"/shoe/update?id=${shoe._id}\")`
+      div(class="row-sm-2", class="m-1") shoe #{shoe.shoeName}(#{shoe.shoePrice}) is #{shoe.shoemadein} 
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
