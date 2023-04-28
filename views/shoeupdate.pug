@@ -1,43 +1,45 @@
 extends layout
+
 block content
     h1= title
-
     if (toShow == null)
-      h2 No instance to delete
+      h2 No instance to update
     else
-        - let shoeid = toShow._id
-        - let shoeName = toShow.shoeName
-        - let shoePrice = toShow.shoePrice
-        - let shoemadein = toShow.shoemadein
-        div.row(class='mb-2')
+      - let shoeId = toShow._id
+      - let shoeName = toShow.shoeName
+      - let shoePrice = toShow.shoePrice
+      - let shoemadein = toShow.shoemadein
+
+      div.row(class='mb-2')
         div.mr-1 ID is
-        div #{shoeid}
-        - let actionid = "/resource/shoe/" + shoeid
-        form(id='ShoeForm', action= actionid, method="PUT")
+        div #{shoeId}
+      - let actionid = "/resource/shoe/" + shoeId
+      form(id='shoeForm', action= actionid, method="PUT")
         div.form-group
-            label.shoeAttr(for='shoeName') shoe shoeName
-            input#shoeName(type='text', name='shoeName', value= shoeName )
+          label.shoeAttr(for='shoeName') shoe shoeName :
+          input#shoeName(type='text', name='shoeName', value= shoeName )
         div.form-group
-        label.shoeAttr(for='shoePrice') shoe shoePrice
-            input#shoePrice(type='number', name='shoePrice', value= shoePrice )
+          label.shoeAttr(for='shoePrice') shoe shoePrice :
+          input#shoePrice(type='number', name='shoePrice', value= shoePrice )
         div.form-group
-            label.shoeAttr(for='shoemadein') shoe shoemadein
-            input#shoemadein(type='text', name='shoemadein', value= shoemadein )
+          label.shoeAttr(for='shoemadein') shoe shoemadein :
+          input#shoemadein(type='text', name='shoemadein', value= shoemadein )
         input(type="submit")
+
     script.
-      document.forms['ShoeForm'].addEventListener('submit', (event) => {
+      document.forms['shoeForm'].addEventListener('submit', (event) => {
         event.preventDefault();
         // TODO do something here to show user that form is being submitted
         fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
         }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
+          return resp.json(); // or resp.text() or whatever the server sends
         }).then((body) => {
-        alert("Update succeded")
-        // TODO handle body
+          alert("Update succeded")
+          // TODO handle body
         }).catch((error) => {
-        // TODO handle error
-        alert("Update failed " + error )
+          // TODO handle error
+          alert("Update failed " + error )
         });
-        });
+      });

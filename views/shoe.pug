@@ -1,16 +1,29 @@
 extends layout
 
 block content
-  - let shoe = results
   h1= title
-  div(class="container-fluid")
-  div(class="row m-1")
-    each shoes in shoe
-      - let destination = `dispatch(\"/shoe/update?id=${shoe._id}\")`
-      div(class="row-sm-2", class="m-1") shoe #{shoe.shoeName}(#{shoe.shoePrice}) is #{shoe.shoemadein} 
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
-
-  script.
-    function dispatch(path){
-      window.location.href=path
-    }
+  - let destination3 = `dispatch(\"/shoe/create\")`
+  p 
+    button.btn( class="btn-success ml-1", onclick= destination3) Create
+  p
+   - let result = results
+    div(class="container-fliud")
+        div(class="row")
+            each item,ind in result 
+                - let destination = `dispatch(\"/shoe/update?id=${item._id}\")`
+                - let destination1  = `dispatch(\"/shoe/delete?id=${item._id}\")`
+                - let destination2  = `dispatch(\"/shoe/detail?id=${item._id}\")`
+                div(class="col-sm-2" class="m-1")  
+                    h3 Driver  #{item.driver}
+                    p Ranking  #{item.ranking}
+                    p 
+                     button.btn( class="btn-primary ml-1", onclick= destination) Update
+                    p
+                     button.btn( class="btn-danger ml-1", onclick= destination1) Delete  
+                    p
+                     button.btn( class="btn-info ml-1", onclick= destination2) Detail
+    script. 
+        function dispatch(path){
+          console.log(path);
+          window.location.href=path;
+        }
